@@ -80,11 +80,17 @@ def build_premake():
           '-f', 'Bootstrap.mak',
           'windows',
           ], shell=False)
-    else:
+    elif sys.platform == 'linux':
+        subprocess.call([
+            'make',
+            '-f', 'Bootstrap.mak',
+            'linux',
+        ], shell=False)
+    elif sys.platform == 'freebsd12' or sys.platform == 'freebsd13':
       subprocess.call([
-          'make',
+          'gmake',
           '-f', 'Bootstrap.mak',
-          'linux',
+          'bsd',
           ], shell=False)
   finally:
     os.chdir(cwd)
